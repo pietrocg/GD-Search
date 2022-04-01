@@ -2,55 +2,40 @@ import pandas as pd
 import requests
 import datetime
 from bs4 import BeautifulSoup
+import feedparser
+import json
+import requests
 
-url = "https://www.google.com/search?q="
+def fetch_trending():
 
-search_term_raw = input("What to search: ") # used for file name too
-target_site = input("Do you want to search on a specific site? (y/n) ")
-if target_site == "y":
-    target_site = input("Specify the site domain (example: twitter.com): ")
-    target_site_formatted = "site%3A"+target_site+"+"
-file_search = input("Do you want to search for a specific file type? (y/n)")
-if file_search == "y":
-    file_target = input("Specify file type: (example: pdf): ")
-    file_target_formatted= "filetype%3A"+file_target+"+"
-search_term_formatted = search_term_raw.replace(" ", "+")
-if target_site == "y" and file_search == "n":
-    search_term = url+target_site_formatted+search_term_formatted
-if target_site == "n" and file_search == "y":
-    search_term = url+file_target_formatted+search_term_formatted
-if target_site == "y" and file_search == "y":
-    search_term = url+target_site_formatted+file_target_formatted+search_term_formatted
-else:
-    search_term = url+search_term_formatted
+    trends_url = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=US"
 
-user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582'
-headers = {"user-agent" : user_agent}
+    results = []
 
-response = requests.get(search_term, headers=headers)
+    RSS = feedparser.parse(trends_url)
 
-# parses content from webpage
-if response.status_code == 200:
-    soup = BeautifulSoup(response.content, "html.parser")
+    RSS_titles = []
 
-results = []
-try:
-    for element in soup.find_all("div", class_="g"):
-        anchors = element.find_all("a")
-        if anchors:
-            link = anchors[0]['href']
-            if link != None:
-                link = link.replace("https://", "")
-                title = element.find('h3').text
-                result = {"title": title, "link": link}
-                results.append(result)
-except(AttributeError, KeyError) as er:
-    print("Attribute or Key error")
-    pass
+    for i in range(len(RSS.entries)):
 
-dataframe = pd.DataFrame(data=results)
+        RSS_titles.append(RSS.entries[i]['title'])
 
-print(dataframe)
-date = datetime.datetime.now()
+    return RSS_titles
 
-dataframe.to_csv(search_term_raw+"_scraping_results_"+str(date.strftime("%m"))+"_"+str(date.strftime("%d"))+"_"+str(date.strftime("%H"))+"_"+str(date.strftime("%M")))
+def fetch_top_google_results():
+
+    url = "https://www.googleapis.com/customsearch/v1?"
+
+    API_key = "AIzaSyAXYsw2-ZrU8jFKhdn4p5myf6aGqfwCseM"
+
+    params = {'key': API_key, 'cx':'gd-search-1648827529904'}
+
+    results = requests.request("GET", url, params=params)
+
+    #result = json.loads(results.text)
+
+    print(results.text)
+
+
+print(fetch_trending())
+print(fetch_top_google_results())
