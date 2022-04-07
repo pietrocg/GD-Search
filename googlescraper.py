@@ -1,10 +1,6 @@
-import pandas as pd
-import requests
-import datetime
-from bs4 import BeautifulSoup
 import feedparser
 import json
-import requests
+from googleapiclient.discovery import build
 
 def fetch_trending():
 
@@ -22,20 +18,22 @@ def fetch_trending():
 
     return RSS_titles
 
-def fetch_top_google_results():
-
-    url = "https://www.googleapis.com/customsearch/v1?"
+def fetch_top_google_results(terms):
 
     API_key = "AIzaSyAXYsw2-ZrU8jFKhdn4p5myf6aGqfwCseM"
 
-    params = {'key': API_key, 'cx':'gd-search-1648827529904'}
+    cx = 'c78ad6819d9115784'
 
-    results = requests.request("GET", url, params=params)
+    resource = build("customsearch", "v1", developerKey=API_key).cse()
+    results = {}
+    for term in terms:
+        result = resource.list(q=term, cx=cx).execute()
+        for item in result['items']:
+            results[term] = item['link']
+    print(results)
+    return results
 
-    #result = json.loads(results.text)
-
-    print(results.text)
 
 
-print(fetch_trending())
-print(fetch_top_google_results())
+terms = fetch_trending()
+results = fetch_top_google_results(terms)
