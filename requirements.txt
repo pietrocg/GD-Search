@@ -1,1 +1,9 @@
 flask
+wheel
+numpy
+pandas
+pip
+requests
+datetime
+bs4
+pystrich
