@@ -22,16 +22,19 @@ cnxn = mysql.connector.connect(**config)
 cursor = cnxn.cursor()
 
 cursor.execute("CREATE TABLE IF NOT EXISTS terms ("
-               "term_ID INT NOT NULL,"
+               "term_ID INT NOT NULL AUTO-INCREMENT,"
                "term VARCHAR(45),"
                "article_ID INT NOT NULL,"
-               "dateadded DATETIME)")
+               "dateadded DATETIME)"
+               "CONSTRAINT terms_pk PRIMARY KEY (term_ID)");
 
 cursor.execute("CREATE TABLE IF NOT EXISTS articles ("
-               "article_ID INT NOT NULL,"
+               "article_ID INT NOT NULL AUTO-INCREMENT,"
                "term_ID INT NOT NULL,"
                "article_title VARCHAR(45),"
                "article_URL VARCHAR(255),"
-               "dateadded DATETIME)")
+               "dateadded DATETIME)"
+               "CONSTRAINT articles_pk PRIMARY KEY (article_ID)"
+               "CONSTRAINT articles_fk FOREIGN KEY(article_ID) REFERENCES terms(term_ID) [ON DELETE{CASCADE}] [ON UPDATE{CASCADE}]);
 
 cnxn.commit()  # this commits changes to the database
