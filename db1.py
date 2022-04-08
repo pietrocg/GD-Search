@@ -35,6 +35,6 @@ cursor.execute("CREATE TABLE IF NOT EXISTS articles ("
                "article_URL VARCHAR(255),"
                "dateadded DATETIME)"
                "CONSTRAINT articles_pk PRIMARY KEY (article_ID)"
-               "CONSTRAINT articles_fk FOREIGN KEY(article_ID) REFERENCES terms(term_ID) [ON DELETE{CASCADE}] [ON UPDATE{CASCADE}]);
+               "CONSTRAINT articles_fk FOREIGN KEY(article_ID) REFERENCES terms(term_ID) [ON DELETE{CASCADE}] [ON UPDATE{CASCADE}])";
 
 cnxn.commit()  # this commits changes to the database
