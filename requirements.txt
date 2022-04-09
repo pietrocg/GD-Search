@@ -3,7 +3,6 @@ feedparser
 google-api-python-client
 pypyodbc
 feedparser
-mysql
 MySQLdb
 configparser
 wheel
