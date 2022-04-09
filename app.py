@@ -4,12 +4,14 @@ import DBcalls as DB
 import pypyodbc
 from IPython.display import HTML
 import configparser
+from pathlib import Path
 
 # opening DB connection
 
 c = configparser.RawConfigParser()
-c.read(open('.config'))
-config = dict(c.items())
+c.read(Path.cwd() / 'config.ini')
+config = dict(c.items('DETAILS'))
+print(config)
 cursor, cnxn = DB.connect(config)
 DB.tables(cursor)
 

@@ -10,7 +10,6 @@ def connect(config):
     cursor = cnxn.cursor()  # connection cursor
     cursor.execute('CREATE DATABASE IF NOT EXISTS scraper')  # creates 'scraper' database, which is used for terms and articles
     cnxn.close()  # close database connection to reconnect later
-
     config['database'] = 'scraper'  # add new database to config dict
     cnxn = mysql.connector.connect(**config)
     cursor = cnxn.cursor()
