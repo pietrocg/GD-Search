@@ -3,3 +3,10 @@ feedparser
 google-api-python-client
 DBCalls
 pypyodbc
+feedparser
+json
+googleapiclient.discovery
+mysql.connector
+wheel
+numpy
+pandas
