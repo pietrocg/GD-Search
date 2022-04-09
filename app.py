@@ -1,42 +1,34 @@
-from flask import Flask
+from flask import Flask, request, render_template, session, redirect
 import googlescraper as scraper
 import DBcalls as DB
 import pypyodbc
+from IPython.display import HTML
+import configparser
 
+# opening DB connection
+
+c = configparser.RawConfigParser()
+c.read(open('.config'))
+config = dict(c.items())
+cursor, cnxn = DB.connect(config)
+DB.tables(cursor)
 
 app = Flask(__name__)
 
 @app.route("/")
 
-def search_page(results):
+def results_page():
 
-    html = '<table>'
-    '<caption>Trending Topics on the Interwebs Today</caption>'
-    '<tr>'
-    '  <th>Trending Term</th>'
-    '  <th>Links</th>'
-    '</tr>'
-    '<tr>'
-    '  <td>%s</td>'%results
-    '  <td>Freecode Camp</td>'
-    '  <td>Enki</td>'
-    '</tr>'
-    '<tr>'
-    '  <td>W3Schools</td>'
-    '  <td>Academind</td>'
-    '  <td>Programming Hero</td>'
-    '</tr>'
-    '<tr>'
-    '  <td>Khan Academy</td>'
-    '  <td>The Coding Train</td>'
-    '  <td>Solo learn</td>'
-    '</tr>'
-    '</table>'
+    results = DB.read(cnxn)
+
+    html = HTML(results.to_html(classes='table table-stripped'))
+
     return html
 
     
 terms = scraper.fetch_trending()
 results = scraper.fetch_google_results(terms)
-print(results)
+DB.write(results, cnxn)
+page= results_page()
 
 

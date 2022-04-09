@@ -9,8 +9,6 @@ def fetch_trending():
 
     trends_url = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=US"
 
-    results = []
-
     RSS = feedparser.parse(trends_url)
 
     RSS_titles = []
@@ -35,10 +33,4 @@ def fetch_google_results(terms):
         for item in result['items']:
             links.append(item['link'])
         results[term] = links
-    return pd.Dataframe.from_dict(results)
-
-'''
-def write_to_db(results):
-    DB.db_write(results)
-'''
-
+    return pd.DataFrame.from_dict(results)

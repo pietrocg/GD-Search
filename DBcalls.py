@@ -1,28 +1,23 @@
 import mysql.connector
 from mysql.connector.constants import ClientFlag
 import MySQLdb as pdb
-import configparser
 
-# cloud database config info, change when uploading to GCP
-c = configparser.RawConfigParser()
-c.read(open('.config'))
-config = dict(c.items())
+
 # establishes database connection
 
-def db_connect(config):
+def connect(config):
     cnxn = mysql.connector.connect(**config)
     cursor = cnxn.cursor()  # connection cursor
-    cursor.execute(
-        'CREATE DATABASE IF NOT EXISTS scraper')  # creates 'scraper' database, which is used for terms and articles
+    cursor.execute('CREATE DATABASE IF NOT EXISTS scraper')  # creates 'scraper' database, which is used for terms and articles
     cnxn.close()  # close database connection to reconnect later
 
     config['database'] = 'scraper'  # add new database to config dict
     cnxn = mysql.connector.connect(**config)
     cursor = cnxn.cursor()
-    return cursor
+    return cursor, cnxn
 
 
-def db_tables(cursor):
+def tables(cursor):
     cursor.execute("CREATE TABLE IF NOT EXISTS terms ("
                    "term_ID INT NOT NULL,"
                    "term VARCHAR(45),"
@@ -55,12 +50,11 @@ def db_tables(cursor):
 
     cnxn.commit()  # this commits changes to the database
 
-def db_write(input, cursor):
-    for line in input:
-        cursor.execute("INSERT INTO articles ")
+def write(input, cnxn):
+    input.to_sql('scraper', cnxn)
 
 
-
-
-def db_read(cursor):
-    pass
+def read(cnxn):
+    query = 'SELECT * from articles;'
+    results = pd.read_sql(query, cnxn)
+    return results
