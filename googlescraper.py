@@ -1,6 +1,8 @@
 import feedparser
 import json
 from googleapiclient.discovery import build
+import mysql.connector
+import DBcalls as DB
 
 def fetch_trending():
 
@@ -18,7 +20,7 @@ def fetch_trending():
 
     return RSS_titles
 
-def fetch_top_google_results(terms):
+def fetch_google_results(terms):
 
     API_key = "AIzaSyAXYsw2-ZrU8jFKhdn4p5myf6aGqfwCseM"
 
@@ -28,12 +30,13 @@ def fetch_top_google_results(terms):
     results = {}
     for term in terms:
         result = resource.list(q=term, cx=cx).execute()
+        links = []
         for item in result['items']:
-            results[term] = item['link']
-    print(results)
-    return results
+            links.append(item['link'])
+        results[term] = links
 
+'''
+def write_to_db(results):
+    DB.db_write(results)
+'''
 
-
-terms = fetch_trending()
-results = fetch_top_google_results(terms)
