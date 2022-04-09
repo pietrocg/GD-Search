@@ -1,6 +1,6 @@
 import mysql.connector
 from mysql.connector.constants import ClientFlag
-import MySQLdb as pdb
+import pymysql as pdb
 
 
 # establishes database connection
