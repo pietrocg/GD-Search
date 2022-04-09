@@ -7,6 +7,8 @@ feedparser
 json
 googleapiclient.discovery
 mysql.connector
+MySQLdb
+configparser
 wheel
 numpy
 pandas
