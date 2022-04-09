@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="29877729-3807-47f5-b586-8356240f860b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DBcalls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/googlescraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/googlescraper.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

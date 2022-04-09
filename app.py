@@ -25,7 +25,7 @@ def search_page(results):
     '  <td>W3Schools</td>'
     '  <td>Academind</td>'
     '  <td>Programming Hero</td>'
-    '</tr>'\
+    '</tr>'
     '<tr>'
     '  <td>Khan Academy</td>'
     '  <td>The Coding Train</td>'
@@ -38,5 +38,5 @@ def search_page(results):
 terms = scraper.fetch_trending()
 results = scraper.fetch_google_results(terms)
 print(results)
-sorted_results = [results[i] for i in results.keys]
-print(sorted_results)
+
+

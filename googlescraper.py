@@ -3,6 +3,7 @@ import json
 from googleapiclient.discovery import build
 import mysql.connector
 import DBcalls as DB
+import pandas as pd
 
 def fetch_trending():
 
@@ -34,6 +35,7 @@ def fetch_google_results(terms):
         for item in result['items']:
             links.append(item['link'])
         results[term] = links
+    return pd.Dataframe.from_dict(results)
 
 '''
 def write_to_db(results):
