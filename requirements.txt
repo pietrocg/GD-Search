@@ -3,8 +3,7 @@ feedparser
 google-api-python-client
 pypyodbc
 feedparser
+mysql.connector
 pymysql
 configparser
-wheel
-numpy
 pandas
