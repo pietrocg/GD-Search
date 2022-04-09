@@ -2,7 +2,7 @@ flask
 feedparser
 google-api-python-client
 unixodbc-dev
-pypdbc
+pyodbc
 pypyodbc
 feedparser
 mysql.connector
