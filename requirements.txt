@@ -1,12 +1,9 @@
 flask
 feedparser
 google-api-python-client
-DBCalls
 pypyodbc
 feedparser
-json
-googleapiclient.discovery
-mysql.connector
+mysql
 MySQLdb
 configparser
 wheel
