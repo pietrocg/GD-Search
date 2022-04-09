@@ -2,3 +2,4 @@ flask
 feedparser
 google-api-python-client
 DBCalls
+pypyodbc
