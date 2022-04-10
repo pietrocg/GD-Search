@@ -19,7 +19,7 @@ def connect(config):
 
 # Cursor encapsulates SQL query and carries out commands to create and populate tables.
 
-def tables(cursor):
+def tables(cursor, cnxn):
     cursor.execute("CREATE TABLE IF NOT EXISTS terms ("
                    "term_ID INT NOT NULL,"
                    "term VARCHAR(45),"

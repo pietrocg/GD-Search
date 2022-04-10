@@ -14,7 +14,7 @@ c = configparser.RawConfigParser()
 c.read(Path.cwd() / 'config.ini')
 config = dict(c.items('DETAILS'))
 cursor, cnxn = DB.connect(config)
-DB.tables(cursor)
+DB.tables(cursor, cnxn)
 
 app = Flask(__name__)
 
