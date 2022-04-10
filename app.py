@@ -20,7 +20,7 @@ app = Flask(__name__)
 
 @app.route("/")
 
-def results_page():
+def results_page(config):
 
     results = DB.read(config)
 
@@ -33,6 +33,6 @@ def results_page():
 terms = scraper.fetch_trending()
 results = scraper.fetch_google_results(terms)
 DB.write(results, config)
-page= results_page()
+page= results_page(config)
 
 
