@@ -3,6 +3,7 @@
 import mysql.connector
 from mysql.connector.constants import ClientFlag
 import pymysql as pdb
+import configparser
 
 
 # establishes database connection
@@ -19,7 +20,8 @@ def connect(config):
 
 # Cursor encapsulates SQL query and carries out commands to create and populate tables.
 
-def tables(cursor, cnxn):
+def tables(cursor, config):
+    cnxn = mysql.connector.connect(**config)
     cursor.execute("CREATE TABLE IF NOT EXISTS terms ("
                    "term_ID INT NOT NULL,"
                    "term VARCHAR(45),"
@@ -52,7 +54,8 @@ def tables(cursor, cnxn):
 
     cnxn.commit()  # this commits changes to the database
 
-def write(input, cnxn):
+def write(input, config):
+    cnxn = mysql.connector.connect(**config)
     input.to_sql('scraper', cnxn)
 
 # Reads results from the database and returns the results
