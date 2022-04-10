@@ -1,7 +1,6 @@
 flask
 feedparser
 google-api-python-client
-unixodbc-dev
 pyodbc
 pypyodbc
 feedparser
