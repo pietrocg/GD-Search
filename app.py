@@ -1,3 +1,5 @@
+# Imported modules
+
 from flask import Flask, request, render_template, session, redirect
 import googlescraper as scraper
 import DBcalls as DB
@@ -26,7 +28,8 @@ def results_page():
 
     return html
 
-    
+# Fetch google results and write them to the database
+
 terms = scraper.fetch_trending()
 results = scraper.fetch_google_results(terms)
 DB.write(results, cnxn)
