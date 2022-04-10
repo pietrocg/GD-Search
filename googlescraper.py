@@ -1,3 +1,5 @@
+# Imported modules
+
 import feedparser
 import json
 from googleapiclient.discovery import build
@@ -7,9 +9,9 @@ import pandas as pd
 
 def fetch_trending():
 
-    trends_url = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=US"
+    trends_url = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=US" # Provides trending topics on google
 
-    RSS = feedparser.parse(trends_url)
+    RSS = feedparser.parse(trends_url) # Downloads and parses
 
     RSS_titles = []
 
@@ -21,7 +23,7 @@ def fetch_trending():
 
 def fetch_google_results(terms):
 
-    API_key = "AIzaSyAXYsw2-ZrU8jFKhdn4p5myf6aGqfwCseM"
+    API_key = "AIzaSyAXYsw2-ZrU8jFKhdn4p5myf6aGqfwCseM" # Authorization
 
     cx = 'c78ad6819d9115784'
 
