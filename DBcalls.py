@@ -1,3 +1,5 @@
+# Imported modules
+
 import mysql.connector
 from mysql.connector.constants import ClientFlag
 import pymysql as pdb
@@ -15,6 +17,7 @@ def connect(config):
     cursor = cnxn.cursor()
     return cursor, cnxn
 
+# Cursor encapsulates SQL query and carries out commands to create and populate tables.
 
 def tables(cursor):
     cursor.execute("CREATE TABLE IF NOT EXISTS terms ("
@@ -52,7 +55,8 @@ def tables(cursor):
 def write(input, cnxn):
     input.to_sql('scraper', cnxn)
 
-
+# Reads results from the database and returns the results
+    
 def read(cnxn):
     query = 'SELECT * from articles;'
     results = pd.read_sql(query, cnxn)
