@@ -14,7 +14,7 @@ c = configparser.RawConfigParser()
 c.read(Path.cwd() / 'config.ini')
 config = dict(c.items('DETAILS'))
 cursor, cnxn = DB.connect(config)
-DB.tables(cursor, cnxn)
+DB.tables(cursor, config)
 
 app = Flask(__name__)
 
@@ -32,7 +32,7 @@ def results_page():
 
 terms = scraper.fetch_trending()
 results = scraper.fetch_google_results(terms)
-DB.write(results, cnxn)
+DB.write(results, config)
 page= results_page()
 
 
