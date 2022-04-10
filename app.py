@@ -22,7 +22,7 @@ app = Flask(__name__)
 
 def results_page():
 
-    results = DB.read(cnxn)
+    results = DB.read(config)
 
     html = HTML(results.to_html(classes='table table-stripped'))
 

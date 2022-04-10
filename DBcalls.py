@@ -53,14 +53,17 @@ def tables(cursor, config):
                    "REFERENCES 'scraper'.'terms' ('term_ID'))")
 
     cnxn.commit()  # this commits changes to the database
+    cnxn.close()
 
 def write(input, config):
     cnxn = mysql.connector.connect(**config)
     input.to_sql('scraper', cnxn)
-
+    cnxn.close()
 # Reads results from the database and returns the results
     
-def read(cnxn):
+def read(config):
+    cnxn = mysql.connector.connect(**config)
     query = 'SELECT * from articles;'
     results = pd.read_sql(query, cnxn)
+    cnxn.close()
     return results
