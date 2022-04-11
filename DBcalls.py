@@ -57,6 +57,8 @@ def tables(cursor, config):
 
 def write(input, config):
     cnxn = mysql.connector.connect(**config)
+    cursor = cnxn.cursor()
+    cursor.execute("INSERT INTO articles (article_ID, article_title, article_URL) VALUES (%s, %s, %s),"
     input.to_sql('scraper', cnxn)
     cnxn.close()
 # Reads results from the database and returns the results
