@@ -23,9 +23,9 @@ def fetch_trending():
 
 def fetch_google_results(terms):
 
-    API_key = "AIzaSyAXYsw2-ZrU8jFKhdn4p5myf6aGqfwCseM" # Authorization
+    API_key = "" # Authorization
 
-    cx = 'c78ad6819d9115784'
+    cx = ''
 
     resource = build("customsearch", "v1", developerKey=API_key).cse()
     results = {}
